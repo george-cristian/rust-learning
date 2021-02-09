@@ -170,26 +170,37 @@ fn match_statement(country_code:i32) {
 
 fn main()
 {
-    //scope_and_shadowing();
-    //operators();
-    //scope();
-    //sh::stack_and_heap();
+    println!("=========== TYPES AND VARIABLES ===============");
+    println!("=========== SCOPE AND SHADOWING ===============");
+    scope_and_shadowing();
+    println!("=========== OPERATORS ===============");
+    operators();
+    println!("=========== SCOPE ===============");
+    scope();
+    println!("=========== STACK AND HEAP ===============");
+    sh::stack_and_heap();
 
-    //if_statement(45);
-    //while_and_loop();
+    println!("=========== CONTROL FLOW ===============");
+    println!("=========== IF ===============");
+    if_statement(45);
+    println!("=========== WHILE AND LOOP ===============");
+    while_and_loop();
+    println!("=========== FOR ===============");
+    for_loop();
+    println!("=========== MATCH ===============");
+    match_statement(22);
 
-    //for_loop();
-    //match_statement(22);
-
-    //structures::structurizare();
-    //println!("=====================================");
-    //structures::enums(structures::Color::RgbColor(1, 2, 3));
-    //println!("=====================================");
-    //structures::option(10.0, 1.0);
-    //println!("=====================================");
-    //structures::array();
-    //println!("=====================================");
-    //structures::vectors();
+    println!("=========== DATA STRUCTURES ===============");
+    println!("=========== STRUCTS ===============");
+    structures::structurizare();
+    println!("=========== ENUMS ===============");
+    structures::enums(structures::Color::RgbColor(1, 2, 3));
+    println!("=========== OPTION ===============");
+    structures::option(10.0, 1.0);
+    println!("=========== ARRAYS ===============");
+    structures::array();
+    println!("=========== VECTORS ===============");
+    structures::vectors();
 
 
     println!("=========== MORE DATA STRUCTURES ===============");
@@ -201,4 +212,9 @@ fn main()
     more_structures::tuples();
     println!("=========== PATTERN MATCHING ===============");
     more_structures::pattern_matching((0, 0));
+
+    println!("=========== FUNCTIONS ===============");
+    functions::functions();
+    println!("=========== METHODS ===============");
+    functions::methods();
 }
