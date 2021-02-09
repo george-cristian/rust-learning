@@ -83,3 +83,116 @@ pub fn closures() {
     plus_three(&mut f);
     println!("f = {}", f);
 }
+
+fn is_even(x: u32) -> bool {
+    return x % 2 == 0;
+}
+
+pub fn higher_order_functions() {
+    let limit = 500;
+    let mut sum = 0;
+
+    for i in 0.. {
+        let isq = i * i;
+
+        if isq > limit {
+            break;
+        } else if is_even(isq) {
+            sum += isq;
+        }
+    }
+    println!("loop sum = {}", sum);
+
+    let sum2 =
+        (0..).map(|x| { return x * x; })
+             .take_while(|&x| { return x < limit; }) // --> NOTE THAT HERE YOU PASS A REFERENCE (THIS IS HOW TAKE_WHILE WORKS
+             .filter(|x| { return is_even(*x); })// --> NOTE THAT HERE A REFERENCE IS PASSED BY DEFAULT AND YOU HAVE TO ADD A *
+             .fold(0, |sum, x| { return sum + x; });
+    println!("higher order function sum = {}", sum2);
+}
+
+trait Animal { // --> THIS IS A JAVA ABSTRACT CLASS
+
+    fn create(name: &'static str) -> Self; // --> NOTE THAT THIS FUNCTION IS STATIC, AND IS A CONSTRUCTOR
+                                           // --> SELF IS THE CLASS NAME
+
+    fn name(&self) -> &'static str;
+
+    fn talk(&self) { // --> DEFAULT IMPLEMENTATION
+        println!("{} cannot talk", self.name());
+    }
+}
+
+struct Human {
+    name: &'static str
+}
+
+struct Cat {
+    name: &'static str
+}
+
+impl Animal for Human {
+    fn create(name:&'static str) -> Human {
+        return Human { name: name };
+    }
+
+    fn name(&self) -> &'static str {
+        return self.name;
+    }
+
+    fn talk(&self) {
+        println!("{} says Hurr Durr", self.name);
+    }
+}
+
+impl Animal for Cat {
+    fn create(name:&'static str) -> Cat {
+        return Cat { name: name };
+    }
+
+    fn name(&self) -> &'static str {
+        return self.name;
+    }
+
+    fn talk(&self) {
+        println!("{} says wHaT iS tHe PuRpOsE Of LiFe?", self.name);
+    }
+}
+
+trait Summable<T> { // --> THIS IS LIKE AN INTERFACE IN JAVA
+    fn sum(&self) -> T;
+}
+
+impl Summable<i32> for Vec<i32> { // --> EVERY VECTOR OF I32s THAT I WILL CREATE FROM NOW ON WILL HAVE THIS SUMMABLE INTERFACE, THUS THE SUM FUNCTION
+    fn sum(&self) -> i32 {
+        let mut result:i32 = 0;
+
+        for x in self {
+            result += *x;
+        }
+
+        return result;
+    }
+}
+
+pub fn traits() {
+
+    let h = Human { name: "Gogu" };
+    h.talk();
+
+    let h2 = Human::create("Bobi");
+    h2.talk();
+
+    let c = Cat { name: "Alfoncina" };
+    c.talk();
+
+    let c2 = Cat::create("Kush");
+    c2.talk();
+
+    //let a = Animal::create("Geon"); // --> THIS DOES NOT COMPILE BECAUSE YOU CANNOT INSTANTIATE AN ABSTRACT CLASS WITHOUT SPECIFYING A TYPE
+    let a2:Human = Animal::create("Jucu"); // --> THE IMPLEMENTATION OF THE CREATE FUNCTION IS CHOSEN AT COMPILE TIME DEPENDING ON THE TYPE
+    a2.talk();
+
+    let vectorash = vec![1, 2, 3]; // --> NOTE THAT ALL VECTORS WHICH I WILL CREATE AS I32 VECTORS WILL HAVE THE SUMMABLE INTERFACE WHICH I IMPLEMENTED AT THE TOP, THUS THEY WILL HAVE THE SUM FUNCTION
+    println!("sum = {}", vectorash.sum());
+}

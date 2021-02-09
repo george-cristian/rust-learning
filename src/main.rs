@@ -219,4 +219,8 @@ fn main()
     functions::methods();
     println!("=========== CLOSURES ===============");
     functions::closures();
+    println!("=========== HIGHER ORDER FUNCTIONS ===============");
+    functions::higher_order_functions();
+    println!("=========== TRAITS ===============");
+    functions::traits();
 }
