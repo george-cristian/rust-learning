@@ -51,3 +51,35 @@ pub fn methods() {
 
     println!("length of myline is = {}", myline.len());
 }
+
+fn say_hello() { println!("Hello!"); }
+
+pub fn closures() {
+    let sh = say_hello; // --> YOU CAN ASSIGN FUNCTIONS TO VARIABLES (AS IN PYTHON)
+    sh();
+
+    let plus_one = |x:i32| -> i32 { return x + 1; }; // --> THESE ARE INLINE FUNCTIONS
+                                                                // --> THIS WILL EXIST ONLY INSIDE THE CLOSURES FUNCTION
+    let a = 6;
+    println!("{} + 1 = {}", a, plus_one(a));
+
+    let mut two = 2;
+
+    {
+        let plus_two = |x|
+            {
+                let mut z = x;
+                z += two; // --> NOTICE THERE IS A DEPENDENCY ON THE VARIABLE TWO HERE. THIS WILL RENDER IT NOT BORROWABLE AFTER THIS FUNCTION.
+                return z;
+            };
+        println!("{} + 2 = {}", 3, plus_two(3));
+    } // --> THIS SCOPE HELPS TO DESTROY THE plus_two FUNCTION, SO THAT THE VARIABLE TWO CAN BE BORROWED
+
+    let borrow_two = &mut two; // --> THIS DOES NOT COMPILE (WHEN plus_two IS NOT SCOPED) BECAUSE TWO IS ALREADY USED INSIDE THE plus_two FUNCTION
+    println!("two is equal to {}", borrow_two);
+
+    let plus_three = |x:&mut i32| { *x += 3; }; // --> THE ARGUMENT IS PASSED BY A MUT REFERENCE SO I CAN DE-REF IT AND INCREASE IT
+    let mut f = 12;
+    plus_three(&mut f);
+    println!("f = {}", f);
+}

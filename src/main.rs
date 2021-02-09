@@ -217,4 +217,6 @@ fn main()
     functions::functions();
     println!("=========== METHODS ===============");
     functions::methods();
+    println!("=========== CLOSURES ===============");
+    functions::closures();
 }
