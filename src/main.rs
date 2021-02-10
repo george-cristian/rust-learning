@@ -5,6 +5,8 @@ mod sh;
 mod structures;
 mod more_structures;
 mod functions;
+mod lifetime;
+mod crates;
 
 use std::mem::size_of_val;
 
@@ -223,4 +225,15 @@ fn main()
     functions::higher_order_functions();
     println!("=========== TRAITS ===============");
     functions::traits();
+
+    println!("=========== LIFETIME ===============");
+    println!("=========== OWNERSHIP ===============");
+    lifetime::ownership();
+    println!("=========== BORROWING ===============");
+    lifetime::borrowing();
+
+    println!("=========== EXTERNAL CRATES ===============");
+    crates::random();
+    println!("=========== MY CRATES ===============");
+    crates::my_crate();
 }
