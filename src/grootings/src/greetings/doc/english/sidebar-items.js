@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["goodbye",""],["hello","This type of comment is like a docstring for the next function This applies to the hello() function"]]});
